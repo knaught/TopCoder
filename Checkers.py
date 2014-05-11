@@ -21,7 +21,7 @@ class Checkers:
     # guaranteeing it won't be chosen in a min() comparison
     _pos_blacks = ()  # collection of x-y integer coordinate tuples representing positions of black checker pieces
 
-    def compute(self, pos_red, pos_blacks) -> int:
+    def compute(self, pos_red: str, pos_blacks: tuple) -> int:
 
         """
         Using a checker board coordinate system, lower left being (0,0), calculates the fewest number of moves it
@@ -29,7 +29,7 @@ class Checkers:
         the black pieces as per the standard rules for checkers.  No other red pieces are specified.
 
         :param str pos_red: a x-y coord string in the format "x,y" representing the red position
-        :param {str} pos_blacks: a collection of x-y coord strings, as in { "x,y", "x,y", "x,y" }, representing black positions
+        :param {str} pos_blacks: a collection of x-y coord strings, as in { "x,y", "x,y" }, representing black positions
         :return int: fewest number of moves it would take to get from red position to opposite end of board,
                 or -1 if the piece is prevented from moving to the last row
         """
@@ -45,7 +45,7 @@ class Checkers:
         else:
             return cost
 
-    def _cost(self, pos, direction, jump=False) -> int:
+    def _cost(self, pos: tuple, direction: int, jump=False) -> int:
 
         """
         Calculates the total cost of moving one step in the specified direction, summing the cost of the one step and
@@ -75,10 +75,12 @@ class Checkers:
         pos_next = x_next, y_next = x + direction, y + 1
 
         # at finish: no cost unless last move was a jump
-        if y == 7: return jump  # as an int
+        if y == 7:
+            return jump  # as an int
 
         # out of bounds: max cost
-        if x_next < 0 or x_next > 7: return self._MAX_COST
+        if x_next < 0 or x_next > 7:
+            return self._MAX_COST
 
         # next empty: cost 1 for the step + 1 if terminating jump + min cost of moves left and right
         if pos_next not in self._pos_blacks:
@@ -87,7 +89,8 @@ class Checkers:
         # next occupied: no cost for non-terminal jump + min cost of moves left and right (max cost if blocked)
         else:
             pos_next = x_next + direction, y_next + 1
-            if pos_next in self._pos_blacks: return 8  # 2 consecutive blacks (blocked)
+            if pos_next in self._pos_blacks:
+                return 8  # 2 consecutive blacks (blocked)
             return 0 + min(self._cost(pos_next, self._LEFT, True), self._cost(pos_next, self._RIGHT, True))
 
 
@@ -103,4 +106,3 @@ if __name__ == '__main__':
     test("4,4", {"6,6", "5,5", "3,5", "2,6"})  # answer = -1
     test("4,1", {"2,4", "3,4", "4,4", "5,4", "2,6", "3,6", "4,6", "5,6"})  # answer = 3
     test("7,0", {"6,1", "4,3", "2,5"})
-
