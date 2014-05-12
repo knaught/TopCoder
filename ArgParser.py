@@ -3,7 +3,7 @@ Author: Kevin Owens
 Date: 11 May 2014
 Class: ArgParser
 
-Problem description summary (from TopCoder):  Implement a class ArgParser with a method parse(string) that splits
+Problem description summary (from TopCoder Tournament Inv 2001 Semi C+D 500):  Implement a class ArgParser with a method parse(string) that splits
 a single string of arguments into a list of string arguments; e.g., '{a, b, c}' -> ['a', 'b', 'c'].  The input string
 must conform to the following rules:
 
