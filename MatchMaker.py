@@ -3,7 +3,7 @@ Author: Kevin Owens
 Date: 7 May 2014
 Class: MatchMaker
 
-Problem description summary (from TopCoder):  In the context of a dating application, this matches a person with
+Problem description summary (from TopCoder Tournament Inv 2001 Semi A+B 250):  In the context of a dating application, this matches a person with
 candidates who meet their gender preference and compatibility, as determined by the number of matching answers to
 a set of questions.  Inputs to the required getBestMatches() are a list of strings representing the candidate pool,
 each string containing the person's name, gender, gender preference, and answers to 10 questions; the name of the
@@ -81,5 +81,5 @@ if __name__ == '__main__':
                "SALLY F M C D A B",
                "MARGE F M A A C C"]
 
-    print(['BETTY matches with', mm.getBestMatches(members, "BETTY", 2)])
-    print(['JOE matches with', mm.getBestMatches(members, "JOE", 1)])
+    print('BETTY matches with', mm.getBestMatches(members, "BETTY", 2))  # ['JOE', 'TOM']
+    print('JOE matches with', mm.getBestMatches(members, "JOE", 1))  # ['ELLEN', 'BETTY', 'MARGE']
